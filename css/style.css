@@ -425,3 +425,9 @@ body { font-synthesis: none; }
   .to-top { bottom: 84px; }
   .footer { padding-bottom: 90px; }
 }
+
+/* Instagram в подвале — круглый значок вместо ника */
+.footer__col a.footer__insta { align-self: flex-start; margin-top: 10px; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: rgba(10,14,18,.7); -webkit-background-clip: border-box; background-clip: border-box; border: 1px solid rgba(255,255,255,.4); filter: none; transition: background .2s, transform .2s; }
+.footer__insta svg { width: 26px; height: 26px; fill: none; stroke: var(--metal-solid); stroke-width: 2; }
+.footer__col a.footer__insta:hover { background: var(--color-accent); transform: translateY(-2px); }
+.footer__insta:hover svg { stroke: var(--color-dark); }
