@@ -1,0 +1,396 @@
+:root {
+  --color-accent: #688EB1;
+  --color-accent-soft: #B9CDE0;
+  --color-dark: #111111;
+  --color-light: #FFFFFF;
+  --color-muted: #cfd6db;
+  --color-text: #1b1b1b;
+  --color-text-2: #1f2a33;
+  --color-line: #7f8991;
+  --metal: linear-gradient(180deg, #c9d0d5 0%, #98a1a9 42%, #bcc4ca 58%, #7f8991 100%);
+  --metal-wide: linear-gradient(135deg, #c9d0d5 0%, #a2abb2 25%, #c4cbd0 50%, #98a1a9 75%, #bcc4ca 100%);
+  --radius: 20px;
+  --font-head: "Tenor Sans", "Montserrat", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 104px; }
+body {
+  margin: 0; background: #b4bcc3 var(--metal-wide); color: var(--color-text);
+  font: 400 18px/1.6 var(--font-body);
+  -webkit-text-size-adjust: 100%;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; margin: 0; letter-spacing: .01em; }
+h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 14px; font-weight: 600; }
+p { margin: 0 0 1em; }
+:focus-visible { outline: 3px solid var(--color-dark); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--color-dark); color: #fff; padding: 8px 14px; border-radius: 8px; z-index: 100; }
+.skip:focus { left: 8px; }
+.center { text-align: center; margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* Кнопки */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 24px; border-radius: 999px; border: 2px solid transparent;
+  font: 400 16px/1.2 var(--font-head); text-decoration: none; cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s, transform .2s; white-space: nowrap;
+}
+.btn--accent { background: var(--color-accent); color: var(--color-dark); }
+.btn--accent:hover { background: var(--color-dark); color: #fff; }
+.btn--ghost { border-color: var(--color-dark); color: var(--color-dark); background: transparent; }
+.btn--ghost:hover { background: var(--color-dark); color: #fff; }
+.section--dark .btn--accent:hover { background: #fff; color: var(--color-dark); }
+.btn--lg { padding: 16px 32px; font-size: 17px; }
+
+/* Шапка */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; color: #fff; background: transparent; transition: background .3s, backdrop-filter .3s; }
+.header.is-scrolled { background: rgba(10,14,18,.32); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.header.menu-open { background: rgba(10,14,18,.78); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.header__row { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 30px; padding: 14px 0 12px; }
+.header__logo { flex: 0 0 100%; display: flex; justify-content: center; }
+.header__logo img { height: 112px; width: auto; transition: height .3s; }
+.nav { display: flex; gap: 34px; }
+.header .nav a, .header__phone { text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+.nav a { text-decoration: none; font: 400 16px var(--font-head); text-transform: uppercase; letter-spacing: .08em; padding: 8px 2px; border-bottom: 2px solid transparent; }
+.nav a:hover { border-color: var(--color-accent); }
+.header__phone { text-decoration: none; font: 400 16px var(--font-head); white-space: nowrap; }
+.header__phone:hover { color: var(--color-accent); }
+.header__cta { padding: 10px 20px; }
+.burger { display: none; width: 44px; height: 44px; border: 0; background: transparent; padding: 10px; cursor: pointer; flex-direction: column; justify-content: center; gap: 5px; }
+.burger span { display: block; height: 2px; background: #fff; border-radius: 2px; transition: transform .2s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Первый экран */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 230px 0 64px; overflow: hidden; background: var(--color-dark); color: #fff; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,14,18,.82) 0%, rgba(10,14,18,.6) 45%, rgba(10,14,18,.2) 100%); }
+.hero__text { position: relative; z-index: 1; }
+.hero__text > * { max-width: 640px; }
+.eyebrow { font: 400 14px var(--font-head); letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent-soft); margin-bottom: 14px; }
+.hero h1 { font-size: clamp(27px, 7.4vw, 68px); overflow-wrap: anywhere; font-weight: 700; margin-bottom: 20px; }
+.hero h1 span { display: block; color: var(--color-accent); }
+.lead { font-size: clamp(19px, 2.2vw, 24px); color: #e8eef2; }
+.hours { display: flex; align-items: center; gap: 10px; font-weight: 700; margin-bottom: 28px; }
+.hours svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+.hero__btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero .btn--accent:hover { background: #fff; color: var(--color-dark); }
+.hero .btn--ghost { border-color: #fff; color: #fff; }
+.hero .btn--ghost:hover { background: #fff; color: var(--color-dark); }
+
+/* Секции */
+.section { padding: 80px 0; }
+.section--muted { background: linear-gradient(135deg, #dde2e6 0%, #bcc4ca 50%, #d6dce0 100%); }
+.section--dark { background: var(--color-dark); color: #fff; }
+.section__lead { color: var(--color-text-2); max-width: 40em; margin-bottom: 32px; }
+
+/* Почему мы */
+.why { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.why li { background: var(--metal); border-radius: var(--radius); padding: 26px 26px 24px; border: 1px solid var(--color-line); display: flex; flex-direction: column; gap: 4px; position: relative; overflow: hidden; }
+.why li::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--color-accent); }
+.why b { font: 400 22px var(--font-head); }
+.why span { color: var(--color-text-2); }
+
+/* Прайс на фоне фото */
+.section--photo { background: linear-gradient(rgba(10,14,18,.5), rgba(10,14,18,.68)), url("../img/salon/bg-services.jpg") center 42% / cover no-repeat; color: #fff; }
+.section--photo h2 { color: #fff; }
+.section--photo .section__lead { color: #e3e9ed; }
+.price-panel { background: none; padding: 0; border: 0; box-shadow: none; }
+.section--photo { --color-line: rgba(255,255,255,.35); }
+.section--photo .panel h3, .section--photo .row__name, .section--photo .row__price { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.section--photo .row__note, .section--photo .row__time { color: #dbe3e8; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.section--photo .group__title { color: var(--color-accent-soft); border-bottom-color: rgba(185,205,224,.6); }
+.section--photo .panel__note { background: rgba(10,14,18,.55); color: #fff; border-left-color: var(--color-accent); }
+.section--photo .loading { color: #fff; }
+.section--photo .tab { background: rgba(10,14,18,.45); border-color: rgba(255,255,255,.45); color: #fff; }
+.section--photo .tab:hover { border-color: var(--color-accent); }
+.section--photo .tab[aria-selected="true"] { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-dark); }
+.section--photo .center .btn--accent:hover { background: #fff; color: var(--color-dark); }
+@media (max-width: 600px) { .tabs { margin-inline: -16px; padding-inline: 16px; } }
+
+/* Прайс */
+.tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.tab { font: 400 15px var(--font-head); padding: 11px 20px; border-radius: 999px; border: 2px solid var(--color-line); background: var(--metal); color: var(--color-dark); cursor: pointer; transition: all .2s; }
+.tab:hover { border-color: var(--color-accent); }
+.tab[aria-selected="true"] { background: var(--color-dark); border-color: var(--color-dark); color: #fff; }
+.panel[hidden] { display: none; }
+.panel h3 { font-size: 24px; margin-bottom: 18px; font-weight: 600; }
+.group { margin-bottom: 30px; }
+.group__title { font: 400 14px var(--font-head); text-transform: uppercase; letter-spacing: .12em; color: #2B4560; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid var(--color-accent-soft); }
+.rows { list-style: none; margin: 0; padding: 0; }
+.row { display: grid; grid-template-columns: 1fr auto auto; gap: 8px 22px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--color-line); }
+.row__name { font-weight: 600; }
+.row__note { display: block; font-weight: 400; font-size: 15px; color: var(--color-text-2); }
+.row__time { color: var(--color-text-2); font-size: 15px; white-space: nowrap; text-align: right; min-width: 5.5em; }
+.row__price { font: 400 18px var(--font-head); white-space: nowrap; text-align: right; min-width: 6.5em; }
+.panel__note { background: var(--color-muted); border-left: 5px solid var(--color-accent); border-radius: 0 14px 14px 0; padding: 14px 18px; color: var(--color-text-2); font-size: 16px; margin-top: 6px; }
+.loading { color: var(--color-text-2); }
+
+/* Мастера */
+.slider { position: relative; }
+.masters { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 2px 18px; scrollbar-width: thin; scrollbar-color: #5d666e transparent; -webkit-overflow-scrolling: touch; }
+.masters .master { flex: 0 0 calc((100% - 66px) / 4); scroll-snap-align: start; }
+.slider__btn { position: absolute; top: 38%; z-index: 2; width: 52px; height: 52px; border-radius: 50%; border: 1px solid #5d666e; background: var(--color-dark); color: #fff; cursor: pointer; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0,0,0,.3); transition: opacity .2s, background .2s; }
+.slider__btn:hover { background: var(--color-accent); color: var(--color-dark); }
+.slider__btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.slider__btn--prev { left: -18px; }
+.slider__btn--next { right: -18px; }
+.slider__btn[disabled] { opacity: 0; pointer-events: none; }
+.master { background: var(--metal); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-line); display: flex; flex-direction: column; }
+.master__photo { aspect-ratio: 4 / 5; background: var(--color-accent-soft); overflow: hidden; }
+.master__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.master__photo--empty { display: grid; place-items: center; background: linear-gradient(135deg, var(--color-accent-soft), #dbe6f0); font: 400 72px var(--font-head); color: var(--color-dark); }
+.master__body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.master h3 { font-size: 19px; font-weight: 700; }
+.master__role { color: var(--color-text-2); font-size: 16px; line-height: 1.4; }
+.master__exp { font: 400 13px var(--font-head); text-transform: uppercase; letter-spacing: .08em; color: #2B4560; }
+.master__note { font-size: 15px; color: var(--color-text); }
+.master .btn { margin-top: auto; padding: 10px 18px; font-size: 14px; align-self: flex-start; }
+.master__body > .master__note + .btn, .master__body > .master__exp + .btn { margin-top: 14px; }
+.master__spacer { flex: 1; }
+
+/* Галерея */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; grid-auto-flow: dense; gap: 14px; margin-top: 28px; }
+.gallery figure { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--color-muted); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.gallery figure:hover img { transform: scale(1.04); }
+.g--tall { grid-row: span 2; }
+
+.insta { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.insta h2 { max-width: 20em; margin: 0; font-size: clamp(26px, 4vw, 40px); }
+.insta__icon { width: 64px; height: 64px; padding: 14px; border-radius: 50%; background: var(--color-dark); color: #fff; fill: none; stroke: currentColor; stroke-width: 2; }
+.insta__handle { font: 400 18px var(--font-head); margin: 0 0 10px; letter-spacing: .04em; }
+.btn--dark { background: var(--color-dark); color: #fff; }
+.btn--dark:hover { background: #fff; color: var(--color-dark); }
+
+
+/* Сертификаты */
+.cert { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cert > div { max-width: 40em; }
+.cert h2 { color: #fff; }
+.cert p { color: #d5dde3; }
+.cert__small { font-size: 16px; opacity: .85; margin: 0; }
+
+/* Стерильность */
+.clean { max-width: 760px; text-align: center; }
+.clean p { color: var(--color-text-2); font-size: 20px; }
+
+/* Контакты */
+.contacts { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; margin-top: 28px; align-items: stretch; }
+.contacts__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.contacts__list li { display: flex; flex-direction: column; padding: 14px 0; border-bottom: 1px solid var(--color-line); }
+.contacts__list .k { font: 400 13px var(--font-head); letter-spacing: .1em; text-transform: uppercase; color: #2B4560; }
+.contacts__list a { text-decoration: none; font-weight: 700; }
+.contacts__list a:hover { text-decoration: underline; }
+.map { border-radius: var(--radius); overflow: hidden; min-height: 360px; background: #1b2227; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: invert(1) hue-rotate(180deg) brightness(.92) contrast(.95) saturate(.7); }
+
+/* Подвал */
+.footer { background: var(--color-dark); color: #d5dde3; padding: 40px 0 100px; font-size: 16px; }
+.footer__row { display: grid; grid-template-columns: auto 1fr; gap: 20px 40px; align-items: center; }
+.footer img { height: 62px; width: auto; }
+.footer__col { display: flex; flex-direction: column; gap: 2px; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--color-accent); }
+.footer__copy { grid-column: 1 / -1; margin: 0; font-size: 14px; opacity: .6; border-top: 1px solid #333; padding-top: 18px; }
+
+/* Нижняя панель (телефон) */
+.dock { display: none; }
+
+@media (max-width: 1000px) {
+  .masters .master { flex-basis: calc((100% - 44px) / 3); }
+  .header__phone { display: none; }
+}
+@media (max-width: 860px) {
+  body { font-size: 17px; }
+  .section { padding: 56px 0; }
+  .burger { display: flex; position: absolute; right: -8px; top: 14px; }
+  .header__logo img { height: 76px; }
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(10,14,18,.92); flex-direction: column; gap: 0; padding: 8px 16px 16px; border-bottom: 1px solid rgba(255,255,255,.2); }
+  .nav.is-open { display: flex; }
+  .nav a { padding: 14px 4px; font-size: 17px; border-bottom: 1px solid rgba(255,255,255,.2); }
+  .hero { padding: 170px 0 48px; }
+  .hero::after { background: linear-gradient(180deg, rgba(10,14,18,.55), rgba(10,14,18,.8)); }
+  .why { grid-template-columns: repeat(2, 1fr); }
+  .masters .master { flex-basis: calc((100% - 22px) / 2); }
+  .slider__btn--prev { left: -6px; }
+  .slider__btn--next { right: -6px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .contacts { grid-template-columns: 1fr; }
+  .map { min-height: 300px; }
+}
+@media (max-width: 600px) {
+  .header__logo img { height: 64px; }
+  .header__cta { display: none; }
+  .hero { padding-top: 120px; }
+  .hero__btns .btn { flex: 1 1 100%; }
+  .why { grid-template-columns: 1fr; }
+  .masters { gap: 12px; }
+  .masters .master { flex-basis: 74%; }
+  .slider__btn { display: none; }
+  .master__body { padding: 14px 14px 18px; }
+  .master h3 { font-size: 16px; }
+  .master__role { font-size: 14px; }
+  .master__note { font-size: 14px; }
+  .master .btn { padding: 9px 14px; font-size: 13px; }
+  .row { grid-template-columns: 1fr auto; }
+  .row__time { grid-column: 1; grid-row: 2; text-align: left; }
+  .row__price { grid-row: 1 / span 2; grid-column: 2; align-self: center; min-width: 0; }
+  .tabs { flex-wrap: nowrap; overflow-x: auto; margin-inline: -16px; padding: 0 16px 8px; scrollbar-width: none; }
+  .tab { white-space: nowrap; flex: none; }
+  .footer__row { grid-template-columns: 1fr; }
+  .cert .btn { width: 100%; }
+  .dock { display: flex; position: fixed; z-index: 60; left: 12px; right: 12px; bottom: 12px; gap: 10px; align-items: center; background: var(--metal); border: 1px solid #5d666e; border-radius: 999px; padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+  .dock .btn { flex: 1; }
+  .dock__icon { width: 46px; height: 46px; border-radius: 50%; background: var(--color-dark); display: grid; place-items: center; }
+  .dock__icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linejoin: round; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html, .masters { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+/* ===== Металлический текст вместо белого ===== */
+:root {
+  --metal-text: linear-gradient(100deg, #f4f7f9 0%, #98a2ab 22%, #e9edf0 45%, #8b959e 68%, #dde2e6 100%);
+  --metal-solid: #d3d9de;
+}
+.header .nav a, .header__phone,
+.hero h1, .lead, .hours span, .hero .btn--ghost,
+.section--photo h2, .section--photo .section__lead,
+.section--photo .panel h3, .section--photo .row__name, .section--photo .row__price,
+.section--photo .row__note, .section--photo .row__time, .section--photo .loading,
+.cert h2, .cert p,
+.footer__col > span, .footer__col a, .footer__copy {
+  background: var(--metal-text);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.55));
+}
+.hero h1 span { -webkit-text-fill-color: var(--color-accent); background: none; filter: none; }
+.header .nav a:hover, .header__phone:hover, .footer a:hover { -webkit-text-fill-color: var(--color-accent); }
+.hero .btn--ghost { border-color: var(--metal-solid); }
+.hero .btn--ghost:hover { background: var(--metal-text); -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: var(--color-dark); filter: none; }
+.footer__copy { filter: none; }
+.hours svg { stroke: var(--metal-solid); }
+.burger span { background: var(--metal-solid); }
+.section--photo .tab { color: var(--metal-solid); }
+.section--photo .tab[aria-selected="true"] { color: var(--color-dark); }
+.section--photo .panel__note { color: var(--metal-solid); }
+.section--photo .tab:hover { color: #fff; }
+@media (max-width: 600px) { .header .nav a { filter: none; } }
+
+/* Сертификаты на фоне с цветами */
+.section--cert { padding: 90px 0; }
+.section--cert .cert h2, .section--cert .cert p { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: #14202c; -webkit-text-fill-color: #14202c; filter: none; }
+.section--cert .cert p { font-weight: 600; }
+.section--cert .btn--accent { background: var(--color-dark); color: #fff; }
+.section--cert .btn--accent:hover { background: #fff; color: var(--color-dark); }
+
+/* Один общий фон с цветами на сертификаты и отзывы */
+.flowers { background: linear-gradient(rgba(104,142,177,.8), rgba(104,142,177,.8)), url("../img/salon/bg-certificates.jpg") center 80% / cover no-repeat, #688EB1; }
+
+/* Компактный блок отзывов под мастерами */
+.reviews { display: flex; align-items: center; justify-content: center; gap: 10px 18px; flex-wrap: wrap; margin-top: 24px; text-align: center; }
+.reviews p { margin: 0; font-size: 16px; font-weight: 600; color: var(--color-text); }
+.reviews__stars { font-size: 18px; letter-spacing: .1em; color: #d99a12; }
+.reviews .btn { padding: 10px 22px; font-size: 14px; }
+.btn--glow { box-shadow: 0 0 0 4px rgba(104,142,177,.3), 0 6px 16px rgba(43,69,96,.4); }
+
+/* Фото с ножницами — один фиксированный фон: при прокрутке страница «скользит» поверх него */
+:root { --scissors: url("../img/salon/hero-scissors.jpg"); }
+.hero { background: var(--color-dark) var(--scissors) 60% 25% / cover fixed; }
+.section--muted { background: linear-gradient(rgba(208,215,220,.86), rgba(208,215,220,.86)), var(--scissors) 60% 25% / cover fixed; }
+@media (hover: none) and (pointer: coarse) {
+  /* на телефонах fixed работает рывками — там фон едет вместе со страницей */
+  .hero { background-attachment: scroll; }
+  .section--muted { background-attachment: scroll; }
+}
+
+/* Блок Instagram — без цветного фона: тот же фиксированный фон с ножницами */
+.section--insta { background: linear-gradient(rgba(208,215,220,.86), rgba(208,215,220,.86)), var(--scissors) 60% 25% / cover fixed; color: var(--color-dark); }
+@media (hover: none) and (pointer: coarse) { .section--insta { background-attachment: scroll; } }
+
+
+/* Без светлой вуали: фото с ножницами видно, текст — металлический */
+.section--muted, .section--insta { background: linear-gradient(rgba(10,14,18,.62), rgba(10,14,18,.62)), var(--scissors) 60% 25% / cover fixed; color: #fff; }
+.section--muted h2, .section--insta h2, .insta__handle, .reviews p,
+.contacts__list li > span:not(.k), .contacts__list a {
+  background: var(--metal-text);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+}
+.contacts__list a:hover { -webkit-text-fill-color: var(--color-accent); text-decoration: none; }
+.contacts__list .k { color: #B9CDE0; }
+.contacts__list li { border-bottom-color: rgba(255,255,255,.3); }
+.section--insta .btn--dark { background: var(--color-accent); color: var(--color-dark); }
+.section--insta .btn--dark:hover { background: #fff; }
+.insta__icon { box-shadow: 0 0 0 2px rgba(255,255,255,.35); }
+.reviews__stars { text-shadow: 0 1px 4px rgba(0,0,0,.5); color: #e8a923; }
+@media (hover: none) and (pointer: coarse) { .section--muted, .section--insta { background-attachment: scroll; } }
+.why li, .master { color: var(--color-text); }
+.why li b, .master h3 { color: var(--color-dark); }
+
+/* Затемнение первого экрана = затемнению следующих разделов, чтобы между ними не было шва */
+.hero::after { background: rgba(10,14,18,.62); }
+
+/* Блок «Что говорят наши гости» с рейтингом */
+.reviews__title { flex: 0 0 100%; font-size: 22px; margin: 0; background: var(--metal-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 4px rgba(0,0,0,.6)); }
+.reviews__rating { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.reviews__score { font: 400 30px/1 var(--font-head); background: var(--metal-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 4px rgba(0,0,0,.6)); }
+.reviews__count { font-size: 16px; font-weight: 600; background: var(--metal-text); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 4px rgba(0,0,0,.6)); }
+.reviews__count span { -webkit-text-fill-color: transparent; }
+.reviews { gap: 14px 22px; }
+
+/* Карточки «Почему мы» всплывают при прокрутке и приподнимаются при наведении */
+.why li { transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s ease, box-shadow .3s ease; }
+.js-reveal .why li:not(.is-in) { opacity: 0; transform: translateY(46px) scale(.96); }
+.js-reveal .why li.is-in { opacity: 1; transform: none; }
+.why li.is-in:hover { transform: translateY(-6px); box-shadow: 0 16px 34px rgba(0,0,0,.4); transition-delay: 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .why li:not(.is-in) { opacity: 1; transform: none; }
+}
+
+/* Карточки «Почему мы» — прозрачные, стеклянные */
+.why li { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.28); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); color: #fff; }
+.why li::before { background: var(--color-accent); }
+.why li b, .why li span {
+  background: var(--metal-text);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+}
+.why li span { font-weight: 600; }
+.why li.is-in:hover { background: rgba(255,255,255,.12); box-shadow: 0 16px 34px rgba(0,0,0,.35); }
+
+/* Tenor Sans имеет одно начертание — убираем «жирность», чтобы браузер не делал её искусственно */
+h1, h2, h3, .btn, .tab, .nav a, .why b, .master h3, .reviews__score, .header__phone, .row__price, .insta__handle, .master__exp, .eyebrow, .group__title, .contacts__list .k, .hero__badge strong { font-weight: 400; }
+body { font-synthesis: none; }
+.btn { letter-spacing: .03em; }
+.hero h1 span { -webkit-text-fill-color: #9fbfdc; color: #9fbfdc; }
+
+/* Карточки мастеров — прозрачные, стеклянные */
+.master { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.28); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); color: #fff; }
+.master h3, .master__role, .master__note {
+  background: var(--metal-text);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+}
+.master__exp { color: #B9CDE0; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+
+/* Кнопка «Построить маршрут» на тёмном фоне — светлая */
+.section--muted .btn--ghost { border-color: var(--metal-solid); color: var(--metal-solid); text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.section--muted .btn--ghost:hover { background: var(--metal-solid); border-color: var(--metal-solid); color: var(--color-dark); text-shadow: none; }
+
+/* Отзывы теперь под блоком Instagram */
+.insta-wrap { position: relative; z-index: 1; }
+.reviews--after { margin-top: 48px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.25); }
