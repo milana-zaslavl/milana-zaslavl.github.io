@@ -105,11 +105,13 @@
       tab.setAttribute('aria-controls', 'panel-' + sec.id);
       tabs.appendChild(tab);
 
-      var panel = el('div', 'panel');
+      var panel = el('div', 'panel is-collapsed');
       panel.id = 'panel-' + sec.id;
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', tab.id);
       panel.appendChild(el('h3', null, sec.title));
+      var body = el('div', 'panel__body');
+      body.id = 'body-' + sec.id;
 
       sec.groups.forEach(function (g) {
         var group = el('div', 'group');
@@ -125,10 +127,24 @@
           ul.appendChild(li);
         });
         group.appendChild(ul);
-        panel.appendChild(group);
+        body.appendChild(group);
       });
 
-      if (sec.note) panel.appendChild(el('p', 'panel__note', sec.note));
+      if (sec.note) body.appendChild(el('p', 'panel__note', sec.note));
+      panel.appendChild(body);
+
+      // На телефоне прайс свёрнут, его можно развернуть кнопкой
+      var toggle = el('button', 'panel__toggle', 'Показать весь прайс');
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-controls', body.id);
+      toggle.addEventListener('click', function () {
+        var open = panel.classList.toggle('is-collapsed') === false;
+        toggle.setAttribute('aria-expanded', open);
+        toggle.textContent = open ? 'Свернуть' : 'Показать весь прайс';
+        if (!open) panel.scrollIntoView({ block: 'nearest' });
+      });
+      panel.appendChild(toggle);
       panels.appendChild(panel);
     });
 
@@ -234,7 +250,15 @@
   }
 
   var header = $('.header');
-  function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 40); }
+  var toTop = $('#to-top');
+  toTop.addEventListener('click', function () {
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+  });
+  function onScroll() {
+    header.classList.toggle('is-scrolled', window.scrollY > 40);
+    toTop.hidden = window.scrollY < 400;
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
   $('#year').textContent = new Date().getFullYear();
